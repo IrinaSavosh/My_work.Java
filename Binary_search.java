@@ -1,12 +1,13 @@
-package Practice;
+// package Practice;
 
+import java.util.Arrays;
 import java.util.Random;
 
-public class BinarySearch {
+public class Binary_search {
    /*
     * 3.0. Двоичный поиск
     * 
-    
+    * 
     * Задача:
     * 
     * Напишите метод, который проверяет, входит ли в массив заданный элемент или
@@ -17,13 +18,16 @@ public class BinarySearch {
     */
 
    public static void main(String[] args) {
-      int[] array = new int[100000000];
+      int[] array = new int[10000000];
       Random rnd = new Random();
       for (int i = 0; i < array.length; i++) {
 
-         array[i] = rnd.nextInt(100000000);
+         array[i] = rnd.nextInt(100);
       }
-      int x = rnd.nextInt(100000000);
+      int x = rnd.nextInt(100);
+      // System.out.println(Arrays.toString(array));
+      // System.out.println(x);
+
 
       long time = System.currentTimeMillis();
       int result = linear_overshoot(array, x);
@@ -34,13 +38,13 @@ public class BinarySearch {
       System.out.println("__________________________________");
 
       long timeTwo = System.currentTimeMillis();
-      bubble_sorting(array);
+      Arrays.sort(array); // сортировка намного быстрее этим методом, чем пузырьковой
       int resultTwo = binarySort(array, x, 0, array.length - 1);
       System.out.println(System.currentTimeMillis() - timeTwo);
-
+      System.out.println(resultTwo);
    }
 
-   public static int linear_overshoot(int[] array, int x) {
+   public static Integer linear_overshoot(int[] array, int x) {
       int number = -1;
       for (int i = 0; i < array.length; i++) {
          if (array[i] == x)
@@ -63,8 +67,9 @@ public class BinarySearch {
       }
    }
 
-   public static int binarySort(int[] array, int x, int low, int high) {
-      int middle = low - (high - low) / 2;
+   public static Integer binarySort(int[] array, int x, int low, int high) { 
+      // {1. 8. 4. 5}, 4, 0, 3
+      int middle = low + (high - low) / 2;  //  0+(3-0)/2 =2 
       if (low > high)
          middle = -1;
       else if (array[middle] == x)
@@ -73,6 +78,6 @@ public class BinarySearch {
          binarySort(array, x, 0, middle - 1);
       else if (x > array[middle])
          binarySort(array, x, middle + 1, high);
-         return middle;
+      return middle;
    }
 }
